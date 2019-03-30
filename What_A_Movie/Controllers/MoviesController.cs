@@ -7,16 +7,17 @@ using What_A_Movie.Models;
 
 namespace What_A_Movie.Controllers
 {
-    public class MyListController : Controller
+    public class MoviesController : Controller
     {
         private readonly IMovieRepository _movieRepository;
-        public MyListController(IMovieRepository movieRepository)
+        public MoviesController(IMovieRepository movieRepository)
         {
             _movieRepository = movieRepository;
         }
         public IActionResult Index()
         {
             var movies = _movieRepository.GetAllMovies().OrderBy(p => p.Name);
+
             return View(movies);
         }
     }
