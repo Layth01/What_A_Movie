@@ -1,0 +1,42 @@
+﻿html, body {
+    background-image: url('../images/490912.jpg') ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    background-position:center;
+ 
+}
+.container {
+    height: 100%;
+    align-content: center;
+}
+
+.txt {
+    margin-top:auto;
+    margin-bottom:auto;
+    align-content:center;
+    text-align: center;
+   
+}
+
+.txt h1 {
+        color: white;
+        font-size: 3.8rem;
+        font-weight: 700;
+        letter-spacing: .3rem;
+        text-shadow: .1rem .1rem .8rem black;
+        padding-bottom: 1rem;
+}
+
+    .txt h3 {
+        color: white;
+        font-size: 2rem;
+        text-shadow: .1rem .1rem .5rem black;
+        padding-bottom: 1.6rem;
+    }
+
+btn-lg {
+    border-width: medium;
+    border-radius: 0;
+    font-size: 1.1rem;
+}

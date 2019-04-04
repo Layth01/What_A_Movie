@@ -8,7 +8,7 @@ namespace What_A_Movie.Models
 {
     public class Movie
     {
-        public int Id { get; set; }
+        public int MovieId { get; set; }
         public string Name { get; set; }
         public string Genre { get; set; }
         public double Duration { get; set; }

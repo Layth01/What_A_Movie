@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Embedded Video Example</title>
+    <link href="//amp.azure.net/libs/amp/2.2.4/skins/amp-default/azuremediaplayer.min.css" rel="stylesheet">
+    <script src="//amp.azure.net/libs/amp/2.2.4/azuremediaplayer.min.js"></script>
+</head>
+<body>
+    <h1>Embedded Video Example</h1>
+    <p>The following video provides an introduction to WebMatrix:</p>
+
+    <video id="azuremediaplayer" class="azuremediaplayer amp-default-skin amp-big-play-centered" tabindex="0">
+        <source src="//aka.ms/ampembed?url=%2F%2Flaythchebbi-frct1.streaming.media.azure.net%2Fb070c816-72e5-4cf0-8c3e-720f5f55a7bc%2FGilfoyle%20was%20an%20illegal%20immigran.ism%2Fmanifest" />
+    </video>
+</body>
+
+</html>
+<script>
+    amp.options.flashSS.swf = "//amp.azure.net/libs/amp/latest/techs/StrobeMediaPlayback.2.0.swf"
+    amp.options.silverlightSS.xap = "//amp.azure.net/libs/amp/latest/techs/SmoothStreamingPlayer.xap"
+</script>

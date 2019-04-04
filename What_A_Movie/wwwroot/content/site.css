@@ -1,6 +1,7 @@
 ﻿body {
     overflow-x: hidden;
     font-family: 'Lato', sans-serif;
+    
 }
 
 .navbar {
@@ -13,63 +14,7 @@ nav {
     max-height: 50px;
     background-color:black;
 }
-/*.carousel-item{
-    height: 100vh;
-}
-.carousel-caption {
-    position: absolute;
-    top: 30%;
-    text-transform: uppercase;
-    width: 70%;
-    right:0;
-    left:0;
-}
 
-.carousel-caption h1 {
-        font-size: 3.8rem;
-        font-weight: 700;
-        letter-spacing: .3rem;
-        text-shadow: .1rem .1rem .8rem black;
-        padding-bottom: 1rem;
-}    
-.carousel-caption h3{
-    font-size: 2rem;
-    text-shadow: .1rem .1rem .5rem black;
-    padding-bottom: 1.6rem;
-}
-    */
-#home {
-    background: url('../images/490912.jpg') no-repeat center center fixed;
-    display:table;
-    height:100vh;
-    position:relative;
-    width:100%;
-    background-size:cover;
-}
-.landing-text{
-    display: table-cell;
-    text-align:center;
-    vertical-align:middle;
-}
-    .landing-text h1 {
-        color:white;
-        font-size: 3.8rem;
-        font-weight: 700;
-        letter-spacing: .3rem;
-        text-shadow: .1rem .1rem .8rem black;
-        padding-bottom: 1rem;
-    }
-    .landing-text h3 {
-        color:white;
-        font-size: 2rem;
-        text-shadow: .1rem .1rem .5rem black;
-        padding-bottom: 1.6rem;
-    }
-btn-lg {
-    border-width:medium;
-    border-radius:0;
-    font-size: 1.1rem;
-}
 footer{
     background-color: #40474e;
     color:white;
@@ -91,8 +36,7 @@ hr.socket {
     width: 100%;
 }
 /**Movie Card*/
-
-.card {
-    border: .1rem .1rem .5rem black;
-    height: 60vh;
+.thumb {
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
