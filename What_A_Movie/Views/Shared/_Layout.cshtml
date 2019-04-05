@@ -1,4 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+@using System.Threading.Tasks
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+@inject SignInManager<ApplicationUser> SigninManger
+@inject IAuthorizationService AuthorizationService
+@inject UserManager<ApplicationUser> UserManager
+
+
+
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -127,9 +141,12 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" asp-controller="MyList" asp-action="Index"><i class="fa fa-list"></i> My List</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" asp-controller="Admin" asp-action="UserManagement"><i class="fa fa-users-cog"></i> Admin</a>
-                </li>
+               
+                @if (SigninManger.IsSignedIn(User))
+                {
+                    @await Component.InvokeAsync("AdminMenu")
+                }
+
             </ul>
             <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
                 <li class="nav-item">
@@ -139,7 +156,6 @@
             </ul>
         </div>
     </nav>
-
 
 
     <div class="container">

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using What_A_Movie.Models;
 using What_A_Movie.ViewModels;
 
 namespace What_A_Movie.Controllers
@@ -12,9 +13,9 @@ namespace What_A_Movie.Controllers
     [Authorize]
     public class AdminController : Controller
     {
-        private UserManager<IdentityUser> _userManager;
+        private UserManager<ApplicationUser> _userManager;
 
-        public AdminController(UserManager<IdentityUser> userManager)
+        public AdminController(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
         }
@@ -27,6 +28,7 @@ namespace What_A_Movie.Controllers
         public IActionResult UserManagement()
         {
             var users = _userManager.Users;
+
             return View(users);
         }
         public IActionResult AddUser()
@@ -37,23 +39,30 @@ namespace What_A_Movie.Controllers
       
         public async Task<IActionResult> UpdateUser(string id)
         {
-            IdentityUser user = await _userManager.FindByIdAsync(id);
+            var user = await _userManager.FindByIdAsync(id);
 
                 if (user == null)
                 return RedirectToAction("UserManagement", _userManager.Users);
 
-            return View(user);
+            var vm = new UpdateUserViewModel() { Id = user.Id, Email = user.Email, UserName = user.UserName, BirthDate = user.BirthDate, City = user.City, Country = user.Country };
+            return View(vm);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddUser(AddUserViewModel addUserViewModel)
         {
             if (!ModelState.IsValid) return View(addUserViewModel);
-            IdentityUser user = new IdentityUser()
+
+            var user = new ApplicationUser()
             {
-                UserName = addUserViewModel.UserName,
-                Email = addUserViewModel.Email,
+               UserName = addUserViewModel.UserName,
+               Email = addUserViewModel.Email,
+               BirthDate = addUserViewModel.BirthDate,
+               City = addUserViewModel.City,
+               Country = addUserViewModel.Country
+
             };
+
             IdentityResult result = await _userManager.CreateAsync(user, addUserViewModel.Password);
             if (result.Succeeded)
             {
@@ -68,19 +77,23 @@ namespace What_A_Movie.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> UpdateUser(string id, string username, string email)
+        public async Task<IActionResult> UpdateUser(UpdateUserViewModel updateUserViewModel)
         {
-            IdentityUser user = await _userManager.FindByIdAsync(id);
+            ApplicationUser user = await _userManager.FindByIdAsync(updateUserViewModel.Id);
             if (user != null)
             {
-                user.Email = email;
-                user.UserName = username;
+                user.Email = updateUserViewModel.Email;
+                user.UserName = updateUserViewModel.UserName;
+                user.BirthDate = updateUserViewModel.BirthDate;
+                user.City = updateUserViewModel.City;
+                user.Country = updateUserViewModel.Country; ;
+                
 
                 var result = await _userManager.UpdateAsync(user);
                 if (result.Succeeded) return RedirectToAction("UserManagement", _userManager.Users);
 
                 ModelState.AddModelError("", "User not updated, something went wrong.");
-                return View(user);
+                return View(updateUserViewModel);
             }
             return RedirectToAction("UserManagement", _userManager.Users);
         }

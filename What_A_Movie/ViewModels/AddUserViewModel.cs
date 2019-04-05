@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace What_A_Movie.ViewModels
 {
     public class AddUserViewModel
-    {   public string Id { get; set; }
+    {
         [Required]
         [Display(Name = "User name")]
         public string UserName { get; set; }
@@ -21,5 +21,15 @@ namespace What_A_Movie.ViewModels
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        [Required(ErrorMessage = "Please enter the birth date")]
+        [Display(Name = "Birth date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime BirthDate { get; set; }
+
+        public string City { get; set; }
+
+        public string Country { get; set; }
     }
 }
