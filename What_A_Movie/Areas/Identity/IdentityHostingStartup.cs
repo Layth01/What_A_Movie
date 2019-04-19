@@ -18,7 +18,7 @@ namespace What_A_Movie.Areas.Identity
             builder.ConfigureServices((context, services) => {
                 
                 services.AddDefaultIdentity<ApplicationUser>()
-                
+                .AddRoles<IdentityRole>()  
                 .AddEntityFrameworkStores<AppDbContext>();
                 
                

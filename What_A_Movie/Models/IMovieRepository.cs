@@ -8,5 +8,6 @@ namespace What_A_Movie.Models
     public interface IMovieRepository
     {
          IEnumerable<Movie> GetAllMovies();
+         Movie GetMovieById(int movieId);
     }
 }

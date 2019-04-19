@@ -8,7 +8,7 @@ using What_A_Movie.Models;
 
 namespace What_A_Movie.Controllers
 {
-  
+     [Authorize]
     public class MoviesController : Controller
     {
         private readonly IMovieRepository _movieRepository;
@@ -22,9 +22,16 @@ namespace What_A_Movie.Controllers
 
             return View(movies);
         }
-        public IActionResult Details()
+       
+        public  IActionResult Details(int MovieId)
         {
-            return View();
+            var movie =  _movieRepository.GetMovieById(MovieId);
+
+            if (movie == null)
+            {
+                return NotFound();
+            }
+            return View(movie);
         }
     }
 }

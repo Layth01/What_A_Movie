@@ -1,3 +1,14 @@
-﻿<li class="nav-item">
-    <a class="nav-link text-white" asp-controller="Admin" asp-action="UserManagement"><i class="fa fa-users-cog"></i> Admin</a>
-</li>
+﻿    <li class="dropdown">
+        <a asp-controller="Admin" asp-action="Index">Admin</a>
+        <ul class="dropdown-menu">
+            <li>
+                <a asp-controller="Admin" asp-action="UserManagement">User Management</a>
+            </li>
+            <li>
+                <a asp-controller="Admin" asp-action="RoleManagement">Role Management</a>
+            </li>
+            <li>
+                <a asp-controller="Admin" asp-action="MovieManagement">Movie Management</a>
+            </li>
+        </ul>
+    </li>

@@ -28,6 +28,9 @@ namespace What_A_Movie
             services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IMovieRepository, MovieRepository>();
+
+            //services.AddDefaultIdentity<ApplicationUser>()
+            //    .AddRoleManager<>
             services.AddMvc();
         }
 

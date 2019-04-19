@@ -1,28 +1,67 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    Layout = null;
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Site information -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BigShow - Movie / Film / Cinema Template</title>
+    <meta name="description" content="Bigshow is a template to jump start campaigning your various kind of movie or tv show">
 
-<h1>@ViewData["Title"]</h1>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/lib/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="~/lib/owl-carousel/owl.transitions.css">
+    <link rel="stylesheet" href="~/lib/magnific-popup.js/magnific-popup.css">
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/content/site.css">
+    <link rel="stylesheet" href="~/content/responsive.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="~/images/template/favicon.png">
+    <link rel="apple-touch-icon" href="images/template/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/template/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/template/icon-114x114.png">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.min.js"></script>
+      <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body class="account-page">
+    <div class="account-wrap">
+        <a class="site-logo" href="index-2.html">
+            <img src="~/images/template/logo-white.png" alt="Site Logo">
+        </a>
+
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post" class="accountform signupform">
+            <h3>Sign up, it's free</h3>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
+            <div class="basic-field">
                 <label asp-for="Input.Email"></label>
                 <input asp-for="Input.Email" class="form-control" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="basic-field">
                 <label asp-for="Input.Password"></label>
                 <input asp-for="Input.Password" class="form-control" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="basic-field">
                 <label asp-for="Input.ConfirmPassword"></label>
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
@@ -30,8 +69,18 @@
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>
-</div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+    <!-- Script -->
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/owl-carousel/owl.carousel.js"></script>
+    <script src="~/lib/magnific-popup.js/jquery.magnific-popup.min.js"></script>
+    <script src="~/lib/jquery-ajaxchimp/jquery.ajaxchimp.min.js"></script>
+
+    <script src="~/js/custom.js"></script>
+</body>
+</html>

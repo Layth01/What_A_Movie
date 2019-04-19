@@ -1,34 +1,140 @@
 ﻿@model IEnumerable<What_A_Movie.Models.Movie>
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from codepassenger.com/html/bigshow/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Apr 2019 23:22:59 GMT -->
 <head>
-    <link href="~/content/movies.css" rel="stylesheet" />
+    <!-- Site information -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BigShow - Movie / Film / Cinema Template</title>
+    <meta name="description" content="Bigshow is a template to jump start campaigning your various kind of movie or tv show">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/lib/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="~/lib/owl-carousel/owl.transitions.css">
+    <link rel="stylesheet" href="~/lib/magnific-popup.js/magnific-popup.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/content/site.css">
+    <link rel="stylesheet" href="~/content/responsive.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/template/favicon.png">
+    <link rel="apple-touch-icon" href="images/template/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/template/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/template/icon-114x114.png">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.min.js"></script>
+      <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
 </head>
+
 <body>
-    <div class="container">
-        <div class="row">
-            @foreach (var mov in Model)
-            {
-            <div class="col-md-4">
-                <div class="product-card mx-auto mb-30  m-2">
-                    <div class="product-head d-flex justify-content-between align-items-center">
-                        <span class="badge badge-danger"></span>
-                        <div class="rating-stars">
-                            <i class="fa fa-star active"></i><i class="fa fa-star active"></i><i class="fa fa-star active"></i><i class="fa fa-star active"></i><i class="fa fa-star"></i>
-                        </div>
-                    </div>
-                    <a class="product-thumb" asp-controller="Movies" asp-action="Details"><img src="@mov.ThumbnailUrl" alt="Product Thumbnail"></a>
-                    <div class="product-card-body">
-                        <a class="product-meta" href="#">@mov.Genre</a>
-                        <h5 class="product-title"><a asp-controller="Movies" asp-action="Details">@mov.Name</a></h5><span class="product-price">
-                            @mov.Likes
-                        </span>
-                    </div>
-
-                </div>
+    
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="page-header-overlay">
+            <div class="container">
+                <h2 class="page-title">Latest Movies</h2>
             </div>
-            }
         </div>
-
     </div>
+    <!-- Page Header End -->
+    <div class="main-wrap">
+        <div class="section section-padding video-list-section">
+            <div class="container">
+                <div class="video-list">
+                    @foreach (var mov in Model)
+                    {
+                        <div class="video-item">
+                            <div class="video-thumb">
+                                <img src="@mov.ThumbnailUrl" class="img-responsive" style="height:100%;max-height:390px;" alt="Movie thumb" />
+                            </div>
+                            <div class="video-details">
+                                <h3 class="video-title"><a href="movie-detail.html">@mov.Name</a></h3>
+                                <p class="video-release-date">@mov.ReleaseDate</p>
+                                <div class="ratings-wrap">
+                                    <span class="rating">@mov.Rating</span>
+                                    <div class="expanded-rating">
+                                        <div class="star-rating">
+                                            @for (var i = 0; i <= 3; i++)
+                                            {
+                                                <span class="star on"></span>
+                                            }
+                                        </div>
+                                        <div class="user-voted">
+                                            <i class="fa fa-user"></i>@mov.Likes Votes
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="video-attributes">
+                                    <p class="cast"><label>Actors:</label> Tata Tong, Megan, Carri Dummy Crud</p>
+                                    <p class="duration"><label>Time:</label> 156 Minutes</p>
+                                    <p class="genre"><label>Genres:</label> Action, Drama</p>
+                                    <p class="country"><label>Country: </label> USA</p>
+                                    <p class="language"><label>Language: </label> English</p>
+                                </div>
+                                <div class="share-on">
+                                    <label>Share: </label>
+                                    <div class="share-social">
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="watch-now-wrap">
+                                <a class="btn-watch-now" asp-controller="Movies" asp-action="Details" asp-route-MovieId="@mov.MovieId">Watch Now</a>
+                            </div>
+                        </div>
+                    }
+
+                    <!-- Video Pagination -->
+                    <nav class="navigation pagination" role="navigation">
+                        <div class="nav-links">
+                            <span class="current-page">Page 2 of 14</span>
+                            <a class="prev page-numbers" href="#"><i class="fa fa-caret-left"></i></a>
+                            <a class="page-numbers" href="#">1</a>
+                            <span class="page-numbers current">2</span>
+                            <a class="page-numbers" href="#">3</a>
+                            <a class="page-numbers" href="#">4</a>
+                            <a class="next page-numbers" href="#"><i class="fa fa-caret-right"></i></a>
+                        </div>
+                    </nav>
+                    <!-- Video Pagination End -->
+                </div>
+
+            </div>
+          
+        </div>
+      
+    </div>
+
+  
+    <!-- Script -->
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/owl-carousel/owl.carousel.js"></script>
+    <script src="~/lib/magnific-popup.js/jquery.magnific-popup.min.js"></script>
+    <script src="~/lib/jquery-ajaxchimp/jquery.ajaxchimp.min.js"></script>
+
+    <script src="~/js/custom.js"></script>
 </body>
+
+
+<!-- Mirrored from codepassenger.com/html/bigshow/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Apr 2019 23:23:01 GMT -->
 </html>

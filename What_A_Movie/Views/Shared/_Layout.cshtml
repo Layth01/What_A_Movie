@@ -9,19 +9,23 @@
 @inject IAuthorizationService AuthorizationService
 @inject UserManager<ApplicationUser> UserManager
 
-
-
-
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link href="~/content/site.css" rel="stylesheet" />
-    <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
-    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/lib/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="~/lib/owl-carousel/owl.transitions.css">
+    <link rel="stylesheet" href="~/content/magnific-popup.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/content/site.css">
+    <link rel="stylesheet" href="~/content/responsive.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet">
+
     <title>@ViewBag.Title</title>
 </head>
 <body>
@@ -122,68 +126,204 @@
       </nav>
 
       -->
-    <nav class="navbar navbar-dark navbar-expand-md bg-dark justify-content-center">
-        <a asp-controller="Home" asp-action="Index" class="navbar-brand d-flex w-50 mr-auto">What a movie</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
-            <ul class="navbar-nav w-100 justify-content-center">
-                <li class="nav-item active">
-                    <a class="nav-link text-white" asp-controller="Movies" asp-action="Index"><i class="fa fa fa-film"></i> Movies</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white " href="#"><i class="fa fa-globe"></i> Browse</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#"><i class="fa fa-clock"></i> Recent</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" asp-controller="MyList" asp-action="Index"><i class="fa fa-list"></i> My List</a>
-                </li>
-               
-                @if (SigninManger.IsSignedIn(User))
-                {
-                    @await Component.InvokeAsync("AdminMenu")
-                }
+    <!--<nav class="navbar navbar-dark navbar-expand-md bg-dark justify-content-center">
+            <a asp-controller="Home" asp-action="Index" class="navbar-brand d-flex w-50 mr-auto">What a movie</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+                <ul class="navbar-nav w-100 justify-content-center">
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" asp-controller="Movies" asp-action="Index"><i class="fa fa fa-film"></i> Movies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white " href="#"><i class="fa fa-globe"></i> Browse</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#"><i class="fa fa-clock"></i> Recent</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-controller="MyList" asp-action="Index"><i class="fa fa-list"></i> My List</a>
+                    </li>
 
-            </ul>
-            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-                <li class="nav-item">
-                   <partial name="_LoginPartial" />
-                </li>
-               
-            </ul>
+                    //if (SigninManger.IsSignedIn(User))
+    //{
+                        /*await Component.InvokeAsync("AdminMenu")*/
+    //}
+
+                </ul>
+                <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                    <li class="nav-item">
+                       <partial name="_LoginPartial" />
+                    </li>
+
+                </ul>
+            </div>
+        </nav>-->
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+            <div class="lds-css ng-scope">
+                <div class="lds-ripple">
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    <!-- Preloader End -->
+    <header class="topbar text-white" id="topbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-sm-8">
+                    <p class="topbar-intro">Enjoy your favourite movie, TV show &amp; video in a single subscription at $60</p>
+                </div>
+                <div class="col-lg-6 col-sm-4">
+                    <div class="topbar-right-btns">
+                      
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Header -->
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index-2.html">
+                    <img src="images/template/logo.png" alt="Site Logo">
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="main-nav-collapse">
+                <form class="navbar-form navbar-left">
+                    <select name="type">
+                        <option value="movie" selected>Movies</option>
+                        <option value="tv">TV</option>
+                    </select>
+                    <input type="search" name="searchinput" required>
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a asp-controller="Recent" asp-action="Index">Recent</a></li>
+                    <li class="dropdown">
+                        <a asp-controller="Movies" asp-action="Index">Movies</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="movie-list.html">English</a></li>
+                            <li><a href="movie-list.html">Hindi</a></li>
+                            <li><a href="movie-list.html">Chinees</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Sports</a></li>
+                    @if (SigninManger.IsSignedIn(User) && User.IsInRole("Administrators"))
+                    {
+                        @await Component.InvokeAsync("AdminMenu");
+                    }
+                    <li><a href="news.html">News</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
+    <!-- Main Header End -->
 
-
-    <div class="container">
+    <div>
         @RenderBody()
     </div>
 
-    <!-- <footer>
-         <div class="row justify-content-center">
-             <div class="col-md-5 text-center">
-                 <p>This is footer, i will fix it later</p>
-                 <strong>Contact Us</strong>
-                 <p>
-                     +2160000000<br />
-                     email@email.com
-                 </p>
-                 <a href="#"><i class="fab fa-facebook"></i></a>
-                 <a href="#"><i class="fab fa-twitter"></i></a>
-                 <a href="#"><i class="fab fa-instagram"></i></a>
-             </div>
-         </div>
-         <hr class="socket">
-             &copy;What A Movie.
-
-     </footer>
-        -->
-    <script src="~/lib/bootstrap/js/jquery.js"></script>
-    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- Footer Start -->
+    <footer class="text-white">
+        <div class="footer-widget-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-xs-12 sm-bottom-40">
+                        <div class="widget about-widget">
+                            <div class="widget-inner">
+                                <a class="footer-logo" href="index-2.html">
+                                    <img src="images/template/logo-footer.png" alt="Footer logo">
+                                </a>
+                                <p class="about-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ducimus, atque. Praesentium suscipit provident explicabo dignissimos nostrum numquam deserunt earum accusantium et fugit.</p>
+                                <div class="footer-social">
+                                    <h5 class="footer-social-title">Connect with</h5>
+                                    <div class="socials">
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                                        <a href="#"><i class="fa fa-youtube-play"></i></a>
+                                        <a href="#"><i class="fa fa-instagram"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="widget category-widget">
+                            <h3 class="widget-title">Video Category</h3>
+                            <div class="widget-inner">
+                                <ul class="widget-cat">
+                                    <li class="cat"><a href="#">Movies</a></li>
+                                    <li class="cat"><a href="#">Crime Video</a></li>
+                                    <li class="cat"><a href="#">Dramas</a></li>
+                                    <li class="cat"><a href="#">TV Show</a></li>
+                                    <li class="cat"><a href="#">Popular Video</a></li>
+                                    <li class="cat"><a href="#">Episodes</a></li>
+                                    <li class="cat"><a href="#">Comedy Video</a></li>
+                                    <li class="cat"><a href="#">WWE</a></li>
+                                    <li class="cat"><a href="#">Action &amp; Adventure</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="widget newsletter-widget">
+                            <h3 class="widget-title">Newsletter</h3>
+                            <div class="widget-inner">
+                                <p>Sign up for our mailling list to get latest updates videos and upcomming Movie</p>
+                                <form id="subscriptionForm" class="subscription" action="#" method="post">
+                                    <input type="email" name="email" placeholder="Email Address" required>
+                                    <button type="submit" name="emailsubmit"><i class="fa fa-arrow-circle-right"></i></button>
+                                    <p class="newsletter-success"></p>
+                                    <p class="newsletter-error"></p>
+                                </form>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-7 col-xs-12 xs-text-center">
+                        <ul class="footer-nav">
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Terms of Use</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 col-sm-5 col-xs-12 xs-text-center">
+                        <p class="copyright-text">&copy; 2019 <a href="index-2.html">BigShow</a>. All Rights Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
+    <!-- Script -->
+    <script src="~/lib//jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/owl-carousel/owl.carousel.js"></script>
+    <script src="~/lib/magnific-popup.js/jquery.magnific-popup.min.js"></script>
+    <script src="~/lib/jquery-ajaxchimp/jquery.ajaxchimp.min.js"></script>
+    <script src="~/js/custom.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

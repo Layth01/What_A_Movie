@@ -1,22 +1,260 @@
-﻿<!DOCTYPE html>
+﻿@model What_A_Movie.Models.Movie    
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>Embedded Video Example</title>
-    <link href="//amp.azure.net/libs/amp/2.2.4/skins/amp-default/azuremediaplayer.min.css" rel="stylesheet">
-    <script src="//amp.azure.net/libs/amp/2.2.4/azuremediaplayer.min.js"></script>
+    <!-- Site information -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BigShow - Movie / Film / Cinema Template</title>
+    <meta name="description" content="Bigshow is a template to jump start campaigning your various kind of movie or tv show">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/lib/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="~/lib/owl-carousel/owl.transitions.css">
+    <link rel="stylesheet" href="~/lib/magnific-popup.js/magnific-popup.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/content/site.css">
+    <link rel="stylesheet" href="~/content/responsive.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/template/favicon.png">
+    <link rel="apple-touch-icon" href="images/template/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/template/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/template/icon-114x114.png">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.min.js"></script>
+      <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    @*<link href="//amp.azure.net/libs/amp/2.2.4/skins/amp-default/azuremediaplayer.min.css" rel="stylesheet">
+    <script src="//amp.azure.net/libs/amp/2.2.4/azuremediaplayer.min.js"></script>*@
 </head>
 <body>
-    <h1>Embedded Video Example</h1>
-    <p>The following video provides an introduction to WebMatrix:</p>
+ 
+    <!-- Page Header -->
+    <div class="page-header single-video-header">
+        <div class="page-header-overlay">
+            <div class="container">
+                <h2 class="page-title">@Model.Name</h2>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
 
-    <video id="azuremediaplayer" class="azuremediaplayer amp-default-skin amp-big-play-centered" tabindex="0">
-        <source src="//aka.ms/ampembed?url=%2F%2Flaythchebbi-frct1.streaming.media.azure.net%2Fb070c816-72e5-4cf0-8c3e-720f5f55a7bc%2FGilfoyle%20was%20an%20illegal%20immigran.ism%2Fmanifest" />
-    </video>
+    <div class="main-wrap">
+        <div class="section section-padding video-single-section">
+            <div class="container">
+                <div class="video-single">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="thumb-wrap single-thumb">
+                                <img src="~/images/Silicon.jpg" alt="Dark Night - 2">
+                                <div class="thumb-hover">
+                                    <a class="play-video" href="//aka.ms/ampembed?url=%2F%2Flaythchebbi-frct1.streaming.media.azure.net%2Fb070c816-72e5-4cf0-8c3e-720f5f55a7bc%2FGilfoyle%20was%20an%20illegal%20immigran.ism%2Fmanifest"><i class="fa fa-play"></i></a>
+                                </div>
+                            </div>
+                            <div class="content-wrap">
+                                <div class="video-thumb">
+                                    <img src="@Model.ThumbnailUrl" style="max-width:270px;height:390%;" alt="Movie thumb">
+                                </div>
+                                <div class="video-details xs-top-40">
+                                    <div class="single-section">
+                                         <h3 class="video-title">@Model.Name</h3>
+                                        <p class="video-release-date"> @Model.ReleaseDate</p>
+                                        <div class="ratings-wrap">
+                                            <span class="rating">@Model.Rating</span>
+                                            <div class="expanded-rating">
+                                                <div class="star-rating">
+
+                                                    @for (var i = 0; i <= Model.Likes; i++)
+                                                    {
+                                                        <span class="star on"></span>
+                                                    }
+
+                                                </div>
+                                                <div class="user-voted">
+                                                    <i class="fa fa-user"></i>@Model.Likes Votes
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="video-attributes">
+                                            <p class="cast"><label>Actors:</label> Tata Tong, Megan, Carri Dummy Crud</p>
+                                            <p class="duration"><label>Time:</label> 156 Minutes</p>
+                                            <p class="genre"><label>Genres:</label> @Model.Genre</p>
+                                            <p class="country"><label>Country: </label> USA</p>
+                                            <p class="language"><label>Language: </label> English</p>
+                                        </div>
+                                        <div class="share-on">
+                                            <label>Share: </label>
+                                            <div class="share-social">
+                                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-section video-entry">
+                                        <h3 class="single-section-title">Movie Story</h3>
+                                        <div class="section-content">
+                                            <p>@Model.Description</p>
+                                        </div>
+                                    </div>
+                                    <div class="single-section video-entry">
+                                        <h3 class="single-section-title">Video &amp; Photo</h3>
+                                        <div class="section-content">
+                                            <div id="single-gallery-1" class="owl-carousel single-gallery-slider">
+                                                <img class="img-responsive" src="~/images/slider/single-1.png" alt="Single Slider Image">
+                                                <img class="img-responsive" src="~/images/slider/single-2.png" alt="Single Slider Image">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Latest Movies -->
+        <div class="section section-padding top-padding-normal movie-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="section-header">
+                            <h2 class="section-title">Latest Movies</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="owl-carousel video-carousel" id="video-carousel">
+                        <div class="video-item">
+                            <div class="thumb-wrap">
+                                <img src="~/images/movies/1.png" alt="Movie Thumb">
+                                <span class="rating">9.2</span>
+                                <div class="thumb-hover">
+                                    <a class="play-video" href="https://www.youtube.com/watch?v=5cY5PHE4x_g"><i class="fa fa-play"></i></a>
+                                </div>
+                            </div>
+                            <div class="video-details">
+                                <h4 class="video-title"><a href="movie-detail.html">Wonder Women</a></h4>
+                                <p class="video-release-on">22 Jun 2017</p>
+                            </div>
+                        </div>
+                        <div class="video-item">
+                            <div class="thumb-wrap">
+                                <img src="~/images/movies/2.png" alt="Movie Thumb">
+                                <span class="rating">9.2</span>
+                                <div class="thumb-hover">
+                                    <a class="play-video" href="https://www.youtube.com/watch?v=5cY5PHE4x_g"><i class="fa fa-play"></i></a>
+                                </div>
+                            </div>
+                            <div class="video-details">
+                                <h4 class="video-title"><a href="movie-detail.html">Captain America</a></h4>
+                                <p class="video-release-on">22 Jun 2017</p>
+                            </div>
+                        </div>
+                        <div class="video-item">
+                            <div class="thumb-wrap">
+                                <img src="~/images/movies/3.png" alt="Movie Thumb">
+                                <span class="rating">9.2</span>
+                                <div class="thumb-hover">
+                                    <a class="play-video" href="https://www.youtube.com/watch?v=5cY5PHE4x_g"><i class="fa fa-play"></i></a>
+                                </div>
+                            </div>
+                            <div class="video-details">
+                                <h4 class="video-title"><a href="movie-detail.html">The City Truck</a></h4>
+                                <p class="video-release-on">22 Jun 2017</p>
+                            </div>
+                        </div>
+                        <div class="video-item">
+                            <div class="thumb-wrap">
+                                <img src="~/images/movies/4.png" alt="Movie Thumb">
+                                <span class="rating">9.2</span>
+                                <div class="thumb-hover">
+                                    <a class="play-video" href="https://www.youtube.com/watch?v=5cY5PHE4x_g"><i class="fa fa-play"></i></a>
+                                </div>
+                            </div>
+                            <div class="video-details">
+                                <h4 class="video-title"><a href="movie-detail.html">Dark Night 2</a></h4>
+                                <p class="video-release-on">22 Jun 2017</p>
+                            </div>
+                        </div>
+                        <div class="video-item">
+                            <div class="thumb-wrap">
+                                <img src="~/images/movies/1.png" alt="Movie Thumb">
+                                <span class="rating">9.2</span>
+                                <div class="thumb-hover">
+                                    <a class="play-video" href="https://www.youtube.com/watch?v=5cY5PHE4x_g"><i class="fa fa-play"></i></a>
+                                </div>
+                            </div>
+                            <div class="video-details">
+                                <h4 class="video-title"><a href="movie-detail.html">Wonder Women</a></h4>
+                                <p class="video-release-on">22 Jun 2017</p>
+                            </div>
+                        </div>
+                        <div class="video-item">
+                            <div class="thumb-wrap">
+                                <img src="~/images/movies/2.png" alt="Movie Thumb">
+                                <span class="rating">9.2</span>
+                                <div class="thumb-hover">
+                                    <a class="play-video" href="https://www.youtube.com/watch?v=5cY5PHE4x_g"><i class="fa fa-play"></i></a>
+                                </div>
+                            </div>
+                            <div class="video-details">
+                                <h4 class="video-title"><a href="movie-detail.html">Captain America</a></h4>
+                                <p class="video-release-on">22 Jun 2017</p>
+                            </div>
+                        </div>
+                        <div class="video-item">
+                            <div class="thumb-wrap">
+                                <img src="~/images/movies/3.png" alt="Movie Thumb">
+                                <span class="rating">9.2</span>
+                                <div class="thumb-hover">
+                                    <a class="play-video" href="https://www.youtube.com/watch?v=5cY5PHE4x_g"><i class="fa fa-play"></i></a>
+                                </div>
+                            </div>
+                            <div class="video-details">
+                                <h4 class="video-title"><a href="movie-detail.html">The City Truck</a></h4>
+                                <p class="video-release-on">22 Jun 2017</p>
+                            </div>
+                        </div>
+                        <div class="video-item">
+                            <div class="thumb-wrap">
+                                <img src="~/images/movies/4.png" alt="Movie Thumb">
+                                <span class="rating">9.2</span>
+                                <div class="thumb-hover">
+                                    <a class="play-video" href="https://www.youtube.com/watch?v=5cY5PHE4x_g"><i class="fa fa-play"></i></a>
+                                </div>
+                            </div>
+                            <div class="video-details">
+                                <h4 class="video-title"><a href="movie-detail.html">Dark Night 2</a></h4>
+                                <p class="video-release-on">22 Jun 2017</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Latest Movies End -->
+    </div>
+    @*<script>
+        amp.options.flashSS.swf = "//amp.azure.net/libs/amp/latest/techs/StrobeMediaPlayback.2.0.swf"
+        amp.options.silverlightSS.xap = "//amp.azure.net/libs/amp/latest/techs/SmoothStreamingPlayer.xap"
+    </script>*@
 </body>
 
 </html>
-<script>
-    amp.options.flashSS.swf = "//amp.azure.net/libs/amp/latest/techs/StrobeMediaPlayback.2.0.swf"
-    amp.options.silverlightSS.xap = "//amp.azure.net/libs/amp/latest/techs/SmoothStreamingPlayer.xap"
-</script>

@@ -19,5 +19,10 @@ namespace What_A_Movie.Models
         {
             return _applicationDbContext.Movies;
         }
+
+        public Movie GetMovieById(int Movieid)
+        {
+            return _applicationDbContext.Movies.FirstOrDefault(p => p.MovieId == Movieid);
+        }
     }
 }
