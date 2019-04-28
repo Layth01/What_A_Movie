@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace What_A_Movie.Models
 {
@@ -19,6 +17,7 @@ namespace What_A_Movie.Models
         public string FilmUrl { get; set; }
         public int Likes { get; set; }
         public float Rating { get; set; }
+        public virtual List<MovieReview> MovieReviews { get; set; }
 
     }
 }

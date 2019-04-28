@@ -1,4 +1,7 @@
-﻿@model What_A_Movie.Models.Movie    
+﻿@using System.Net
+@using System.Threading.Tasks
+
+@model MovieDetailsViewModels
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,17 +39,16 @@
       <script src="assets/js/html5shiv.min.js"></script>
       <script src="assets/js/respond.min.js"></script>
     <![endif]-->
-
     @*<link href="//amp.azure.net/libs/amp/2.2.4/skins/amp-default/azuremediaplayer.min.css" rel="stylesheet">
-    <script src="//amp.azure.net/libs/amp/2.2.4/azuremediaplayer.min.js"></script>*@
+        <script src="//amp.azure.net/libs/amp/2.2.4/azuremediaplayer.min.js"></script>*@
 </head>
 <body>
- 
+
     <!-- Page Header -->
     <div class="page-header single-video-header">
         <div class="page-header-overlay">
             <div class="container">
-                <h2 class="page-title">@Model.Name</h2>
+                <h2 class="page-title">@Model.Movie.Name</h2>
             </div>
         </div>
     </div>
@@ -66,32 +68,32 @@
                             </div>
                             <div class="content-wrap">
                                 <div class="video-thumb">
-                                    <img src="@Model.ThumbnailUrl" style="max-width:270px;height:390%;" alt="Movie thumb">
+                                    <img src="@Model.Movie.ThumbnailUrl" style="max-width:270px;height:390%;" alt="Movie thumb">
                                 </div>
                                 <div class="video-details xs-top-40">
                                     <div class="single-section">
-                                         <h3 class="video-title">@Model.Name</h3>
-                                        <p class="video-release-date"> @Model.ReleaseDate</p>
+                                        <h3 class="video-title">@Model.Movie.Name</h3>
+                                        <p class="video-release-date"> @Model.Movie.ReleaseDate</p>
                                         <div class="ratings-wrap">
-                                            <span class="rating">@Model.Rating</span>
+                                            <span class="rating">@Model.Movie.Rating</span>
                                             <div class="expanded-rating">
                                                 <div class="star-rating">
 
-                                                    @for (var i = 0; i <= Model.Likes; i++)
+                                                    @for (var i = 0; i <= Model.Movie.Likes; i++)
                                                     {
                                                         <span class="star on"></span>
                                                     }
 
                                                 </div>
                                                 <div class="user-voted">
-                                                    <i class="fa fa-user"></i>@Model.Likes Votes
+                                                    <i class="fa fa-user"></i>@Model.Movie.Likes Votes
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="video-attributes">
                                             <p class="cast"><label>Actors:</label> Tata Tong, Megan, Carri Dummy Crud</p>
                                             <p class="duration"><label>Time:</label> 156 Minutes</p>
-                                            <p class="genre"><label>Genres:</label> @Model.Genre</p>
+                                            <p class="genre"><label>Genres:</label> @Model.Movie.Genre</p>
                                             <p class="country"><label>Country: </label> USA</p>
                                             <p class="language"><label>Language: </label> English</p>
                                         </div>
@@ -108,18 +110,62 @@
                                     <div class="single-section video-entry">
                                         <h3 class="single-section-title">Movie Story</h3>
                                         <div class="section-content">
-                                            <p>@Model.Description</p>
+                                            <p>@Model.Movie.Description</p>
                                         </div>
                                     </div>
-                                    <div class="single-section video-entry">
-                                        <h3 class="single-section-title">Video &amp; Photo</h3>
-                                        <div class="section-content">
-                                            <div id="single-gallery-1" class="owl-carousel single-gallery-slider">
-                                                <img class="img-responsive" src="~/images/slider/single-1.png" alt="Single Slider Image">
-                                                <img class="img-responsive" src="~/images/slider/single-2.png" alt="Single Slider Image">
+                                    <!-- Given Comment -->
+                                    <div class="given-comment">
+                                        <h3 class="given-comment-title">Comments (03)</h3>
+                                        <ul class="comments">
+                                            <li class="comment">
+
+                                                <div class="comment-wrap">
+
+                                                    @foreach (var review in @Model.Movie.MovieReviews)
+                                                    {
+                                                        @*@Html.Raw(@review.Review)*@
+                                                        @review.Review
+                                                        @*<div>@WebUtility.HtmlDecode(review.Review) </div>*@
+                                                        <hr />
+                                                    }
+
+
+                                                    </div>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- Given Comment -->
+                                    <!-- Commenting form -->
+                                    <div class="commenting-wrap">
+                                        <h4 class="comment-form-title">Leave Your Comments</h4>
+
+                                        <form asp-controller="Movies" asp-action="Details" method="post" class="comment-form">
+
+                                            <h4>Write a review</h4>
+                                            <hr />
+                                            <input type="hidden" asp-for="@Model.Movie.MovieId" />
+
+                                            <div asp-validation-summary="All" class="text-danger"></div>
+
+                                            <div class="form-group">
+                                                <label asp-for="Review" class="col-md-2 control-label"></label>
+                                                <div class="col-md-10">
+                                                    <input asp-for="Review" class="form-control" />
+                                                    <span asp-validation-for="Review" class="text-danger"></span>
+                                                </div>
                                             </div>
-                                        </div>
+
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <input type="submit" class="btn btn-primary" value="Send review" />
+                                                </div>
+                                            </div>
+                                        </form>
+
                                     </div>
+                                    <!-- Commenting form end -->
+
                                 </div>
                             </div>
                         </div>
@@ -252,9 +298,9 @@
         <!-- Latest Movies End -->
     </div>
     @*<script>
-        amp.options.flashSS.swf = "//amp.azure.net/libs/amp/latest/techs/StrobeMediaPlayback.2.0.swf"
-        amp.options.silverlightSS.xap = "//amp.azure.net/libs/amp/latest/techs/SmoothStreamingPlayer.xap"
-    </script>*@
+            amp.options.flashSS.swf = "//amp.azure.net/libs/amp/latest/techs/StrobeMediaPlayback.2.0.swf"
+            amp.options.silverlightSS.xap = "//amp.azure.net/libs/amp/latest/techs/SmoothStreamingPlayer.xap"
+        </script>*@
 </body>
 
 </html>

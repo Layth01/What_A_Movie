@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using What_A_Movie.Models;
 
 namespace What_A_Movie.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190426132230_AddingReviews")]
+    partial class AddingReviews
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -284,7 +286,7 @@ namespace What_A_Movie.Migrations
             modelBuilder.Entity("What_A_Movie.Models.MovieReview", b =>
                 {
                     b.HasOne("What_A_Movie.Models.Movie", "Movie")
-                        .WithMany("MovieReviews")
+                        .WithMany()
                         .HasForeignKey("MovieId");
                 });
 #pragma warning restore 612, 618

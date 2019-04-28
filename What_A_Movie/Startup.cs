@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 using What_A_Movie.Models;
 
 namespace What_A_Movie
@@ -28,6 +23,14 @@ namespace What_A_Movie
             services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IMovieRepository, MovieRepository>();
+            services.AddTransient<IMovieReviewRepository, MovieReviewRepository>();
+            services.AddDefaultIdentity<ApplicationUser>()
+                                        .AddEntityFrameworkStores<AppDbContext>();
+            services.AddAuthentication().AddGoogle(googleOptions =>
+                {
+                    googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+                    googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+                });
 
             //services.AddDefaultIdentity<ApplicationUser>()
             //    .AddRoleManager<>
@@ -39,17 +42,17 @@ namespace What_A_Movie
         {
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
-            
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseHttpsRedirection();
+
             app.UseMvc(routes =>
                 {
                     routes.MapRoute(
                         name: "default",
                         template: "{controller=Home}/{action=Index}/{id?}");
-            });
-          
+                });
+
         }
     }
 }
