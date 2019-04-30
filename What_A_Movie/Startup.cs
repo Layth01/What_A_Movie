@@ -22,15 +22,14 @@ namespace What_A_Movie
         {
             services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+
+
             services.AddTransient<IMovieRepository, MovieRepository>();
             services.AddTransient<IMovieReviewRepository, MovieReviewRepository>();
-            services.AddDefaultIdentity<ApplicationUser>()
-                                        .AddEntityFrameworkStores<AppDbContext>();
-            services.AddAuthentication().AddGoogle(googleOptions =>
-                {
-                    googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
-                    googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
-                });
+
+
+
 
             //services.AddDefaultIdentity<ApplicationUser>()
             //    .AddRoleManager<>
@@ -44,6 +43,7 @@ namespace What_A_Movie
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseAuthentication();
+
             app.UseHttpsRedirection();
 
             app.UseMvc(routes =>

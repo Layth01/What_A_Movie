@@ -120,17 +120,22 @@
                                             <li class="comment">
 
                                                 <div class="comment-wrap">
-
-                                                    @foreach (var review in @Model.Movie.MovieReviews)
+                                                    @if (@Model.Movie.MovieReviews == null)
                                                     {
-                                                        @*@Html.Raw(@review.Review)*@
-                                                        @review.Review
-                                                        @*<div>@WebUtility.HtmlDecode(review.Review) </div>*@
-                                                        <hr />
+                                                        <div>There is no comments</div>
+                                                    }
+                                                    else
+                                                    {
+                                                        @foreach (var review in @Model.Movie.MovieReviews)
+                                                        {
+                                                            @*@Html.Raw(@review.Review)*@
+                                                            @*@review.Review*@
+                                                            <div>@WebUtility.HtmlDecode(review.Review) </div>
+                                                            <hr />
+                                                        }
                                                     }
 
-
-                                                    </div>
+                                                </div>
 
                                             </li>
                                         </ul>
@@ -142,8 +147,7 @@
 
                                         <form asp-controller="Movies" asp-action="Details" method="post" class="comment-form">
 
-                                            <h4>Write a review</h4>
-                                            <hr />
+
                                             <input type="hidden" asp-for="@Model.Movie.MovieId" />
 
                                             <div asp-validation-summary="All" class="text-danger"></div>

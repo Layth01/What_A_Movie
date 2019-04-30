@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
 using What_A_Movie.Models;
 using What_A_Movie.ViewModels;
 
@@ -48,7 +48,7 @@ namespace What_A_Movie.Controllers
             {
                 return RedirectToAction("RoleManagement", _roleManager.Roles);
             }
-            foreach(IdentityError error in result.Errors)
+            foreach (IdentityError error in result.Errors)
             {
                 ModelState.AddModelError("", error.Description);
             }
@@ -57,7 +57,7 @@ namespace What_A_Movie.Controllers
         public async Task<IActionResult> EditRole(string id)
         {
             var role = await _roleManager.FindByIdAsync(id);
-            if(role == null)
+            if (role == null)
             {
                 RedirectToAction("RoleManagement", _roleManager.Roles);
             }
@@ -69,7 +69,7 @@ namespace What_A_Movie.Controllers
                 Users = new List<string>()
             };
 
-            foreach(var user in _userManager.Users)
+            foreach (var user in _userManager.Users)
             {
                 if (await _userManager.IsInRoleAsync(user, role.Name))
                     editRoleViewModel.Users.Add(user.UserName);
@@ -81,20 +81,20 @@ namespace What_A_Movie.Controllers
         {
 
             var role = await _roleManager.FindByIdAsync(editRoleViewModel.Id);
-            if(role != null)
+            if (role != null)
             {
                 role.Name = editRoleViewModel.RoleName;
 
                 var result = await _roleManager.UpdateAsync(role);
 
                 if (result.Succeeded)
-             
+
                     return RedirectToAction("RoleManagement", _roleManager.Roles);
 
                 ModelState.AddModelError("", "Role not updated, something went wrong");
 
                 return View(editRoleViewModel);
-                
+
             }
             return RedirectToAction("RoleManagement", _roleManager.Roles);
         }
@@ -102,7 +102,7 @@ namespace What_A_Movie.Controllers
         public async Task<IActionResult> DeleteRole(string id)
         {
             IdentityRole role = await _roleManager.FindByIdAsync(id);
-            if(role != null)
+            if (role != null)
             {
                 var result = await _roleManager.DeleteAsync(role);
                 if (result.Succeeded)
@@ -125,9 +125,9 @@ namespace What_A_Movie.Controllers
 
             var addUserToRoleViewModel = new UserRoleViewModel { RoleId = role.Id };
 
-            foreach(var user in _userManager.Users)
+            foreach (var user in _userManager.Users)
             {
-                if(!await _userManager.IsInRoleAsync(user, role.Name))
+                if (!await _userManager.IsInRoleAsync(user, role.Name))
                 {
                     addUserToRoleViewModel.Users.Add(user);
                 }
@@ -145,7 +145,7 @@ namespace What_A_Movie.Controllers
             {
                 return RedirectToAction("RoleManagement", _roleManager.Roles);
             }
-            foreach(IdentityError error in result.Errors)
+            foreach (IdentityError error in result.Errors)
             {
                 ModelState.AddModelError("", error.Description);
             }
@@ -159,9 +159,9 @@ namespace What_A_Movie.Controllers
             if (role == null)
                 return RedirectToAction("RoleManagement", _roleManager.Roles);
             var addUserRoleViewModel = new UserRoleViewModel { RoleId = role.Id };
-            foreach(var user in _userManager.Users)
+            foreach (var user in _userManager.Users)
             {
-                if(await _userManager.IsInRoleAsync(user, role.Name))
+                if (await _userManager.IsInRoleAsync(user, role.Name))
                 {
                     addUserRoleViewModel.Users.Add(user);
                 }
@@ -181,7 +181,7 @@ namespace What_A_Movie.Controllers
             {
                 return RedirectToAction("RoleManagement", _roleManager.Roles);
             }
-            foreach(IdentityError error in result.Errors)
+            foreach (IdentityError error in result.Errors)
             {
                 ModelState.AddModelError("", error.Description);
             }
@@ -203,13 +203,13 @@ namespace What_A_Movie.Controllers
         {
             return View();
         }
-        
-      
+
+
         public async Task<IActionResult> UpdateUser(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
 
-                if (user == null)
+            if (user == null)
                 return RedirectToAction("UserManagement", _userManager.Users);
 
             var vm = new UpdateUserViewModel() { Id = user.Id, Email = user.Email, UserName = user.UserName, BirthDate = user.BirthDate, City = user.City, Country = user.Country };
@@ -223,11 +223,11 @@ namespace What_A_Movie.Controllers
 
             var user = new ApplicationUser()
             {
-               UserName = addUserViewModel.UserName,
-               Email = addUserViewModel.Email,
-               BirthDate = addUserViewModel.BirthDate,
-               City = addUserViewModel.City,
-               Country = addUserViewModel.Country
+                UserName = addUserViewModel.UserName,
+                Email = addUserViewModel.Email,
+                BirthDate = addUserViewModel.BirthDate,
+                City = addUserViewModel.City,
+                Country = addUserViewModel.Country
 
             };
 
@@ -236,7 +236,7 @@ namespace What_A_Movie.Controllers
             {
                 return RedirectToAction("UserManagement", _userManager.Users);
             }
-            foreach(IdentityError error in result.Errors)
+            foreach (IdentityError error in result.Errors)
             {
                 ModelState.AddModelError("", error.Description);
             }
@@ -255,7 +255,7 @@ namespace What_A_Movie.Controllers
                 user.BirthDate = updateUserViewModel.BirthDate;
                 user.City = updateUserViewModel.City;
                 user.Country = updateUserViewModel.Country; ;
-                
+
 
                 var result = await _userManager.UpdateAsync(user);
                 if (result.Succeeded) return RedirectToAction("UserManagement", _userManager.Users);
@@ -286,6 +286,6 @@ namespace What_A_Movie.Controllers
             return View("UserManagement", _userManager.Users);
         }
 
-       
+
     }
 }

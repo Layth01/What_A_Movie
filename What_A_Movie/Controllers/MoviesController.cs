@@ -32,34 +32,34 @@ namespace What_A_Movie.Controllers
 
             return View(movies);
         }
-        // [Route("[controller]/Details/{id}")]
-        public IActionResult Details(int MovieId)
-        {
-            var movie = _movieRepository.GetMovieById(MovieId);
-            if (movie == null)
-                return NotFound();
 
-            return View(new MovieDetailsViewModels() { Movie = movie });
-        }
-
-        //[Route("[controller]/Details/{id}")]
         [HttpPost]
         public IActionResult Details(int MovieId, string Review)
         {
-            var movie = _movieRepository.GetMovieById(MovieId);
+            Movie movie = _movieRepository.GetMovieById(movieId: MovieId);
 
             if (movie == null)
             {
                 return NotFound();
             }
 
-            var encodedReview = _htmlEncoder.Encode(Review);
+            string encodedReview = _htmlEncoder.Encode(Review);
             _movieReviewRepository.AddMovieReview(new MovieReview() { Movie = movie, Review = encodedReview });
 
             return View(new MovieDetailsViewModels() { Movie = movie });
-
-
-
         }
+
+        public IActionResult Details(int MovieId)
+        {
+            var movie = _movieRepository.GetMovieById(MovieId);
+
+            if (movie == null)
+                return NotFound();
+
+            return View(new MovieDetailsViewModels() { Movie = movie });
+        }
+
+
+
     }
 }
