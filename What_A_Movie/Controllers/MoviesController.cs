@@ -36,7 +36,7 @@ namespace What_A_Movie.Controllers
         [HttpPost]
         public IActionResult Details(int MovieId, string Review)
         {
-            Movie movie = _movieRepository.GetMovieById(movieId: MovieId);
+            Movie movie = _movieRepository.GetMovieById(MovieId);
 
             if (movie == null)
             {
@@ -45,8 +45,9 @@ namespace What_A_Movie.Controllers
 
             string encodedReview = _htmlEncoder.Encode(Review);
             _movieReviewRepository.AddMovieReview(new MovieReview() { Movie = movie, Review = encodedReview });
+            var reviews = _movieReviewRepository.GetReviewsForMovie(MovieId);
 
-            return View(new MovieDetailsViewModels() { Movie = movie });
+            return View(new MovieDetailsViewModels() { Movie = movie, ReviewList = reviews.ToList() });
         }
 
         public IActionResult Details(int MovieId)
@@ -56,7 +57,9 @@ namespace What_A_Movie.Controllers
             if (movie == null)
                 return NotFound();
 
-            return View(new MovieDetailsViewModels() { Movie = movie });
+            var reviews = _movieReviewRepository.GetReviewsForMovie(MovieId);
+
+            return View(new MovieDetailsViewModels() { Movie = movie, ReviewList = reviews.ToList() });
         }
 
 

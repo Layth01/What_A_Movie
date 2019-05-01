@@ -18,7 +18,7 @@ namespace What_A_Movie.Models
 
         public IEnumerable<MovieReview> GetReviewsForMovie(int movieId)
         {
-            return _appDbContext.MovieReviews.Where(p => p.Movie.MovieId == movieId);
+            return _appDbContext.MovieReviews.Where(m => m.Movie.MovieId == movieId);
         }
     }
 }

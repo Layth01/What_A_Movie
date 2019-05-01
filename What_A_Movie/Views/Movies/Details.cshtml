@@ -120,20 +120,15 @@
                                             <li class="comment">
 
                                                 <div class="comment-wrap">
-                                                    @if (@Model.Movie.MovieReviews == null)
+
+                                                    @foreach (var review in @Model.ReviewList)
                                                     {
-                                                        <div>There is no comments</div>
+                                                        //@Html.Raw(@review.Review)
+                                                        @review.Review
+                                                        //  <div>@WebUtility.HtmlDecode(review.Review) </div>
+                                                        <br />
                                                     }
-                                                    else
-                                                    {
-                                                        @foreach (var review in @Model.Movie.MovieReviews)
-                                                        {
-                                                            @*@Html.Raw(@review.Review)*@
-                                                            @*@review.Review*@
-                                                            <div>@WebUtility.HtmlDecode(review.Review) </div>
-                                                            <hr />
-                                                        }
-                                                    }
+
 
                                                 </div>
 
@@ -145,10 +140,10 @@
                                     <div class="commenting-wrap">
                                         <h4 class="comment-form-title">Leave Your Comments</h4>
 
-                                        <form asp-controller="Movies" asp-action="Details" method="post" class="comment-form">
+                                        <form asp-controller="Movies" asp-action="Details" method="post" role="form" class="comment-form">
 
 
-                                            <input type="hidden" asp-for="@Model.Movie.MovieId" />
+                                            <input type="hidden" asp-for="@Model.MovieId = Model.Movie.MovieId" />
 
                                             <div asp-validation-summary="All" class="text-danger"></div>
 
