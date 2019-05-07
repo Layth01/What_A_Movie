@@ -12,5 +12,6 @@ namespace What_A_Movie.Models
 
         public DbSet<Movie> Movies { get; set; }
         public DbSet<MovieReview> MovieReviews { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
