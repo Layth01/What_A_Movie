@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
+using System.Linq;
+
 using What_A_Movie.Models;
 
 namespace What_A_Movie.Controllers
@@ -18,7 +17,7 @@ namespace What_A_Movie.Controllers
         }
         public IActionResult Index()
         {
-            var movies = _movieRepository.GetAllMovies().OrderBy(p => p.Name);
+            var movies = _movieRepository.Movies.OrderBy(p => p.Name);
             return View(movies);
         }
     }

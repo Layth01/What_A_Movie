@@ -2,7 +2,7 @@
 
 namespace What_A_Movie.Models
 {
-    interface ICategoryRepository
+    public interface ICategoryRepository
     {
         IEnumerable<Category> Categories { get; }
     }

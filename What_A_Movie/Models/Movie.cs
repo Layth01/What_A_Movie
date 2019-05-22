@@ -17,6 +17,7 @@ namespace What_A_Movie.Models
         public string FilmUrl { get; set; }
         public int Likes { get; set; }
         public float Rating { get; set; }
+        public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
         public virtual List<MovieReview> MovieReviews { get; set; }
 

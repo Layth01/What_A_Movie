@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Movie>
+
+<h2>Movie Management</h2>
+
+@if (!Model.Any())
+{
+    <tr><td colspan="3" class="text-center">No pies at this point :()</td></tr>
+}
+else
+{
+    <table class="table table-condensed table-bordered">
+        <tr>
+            <th>Movie ID</th>
+            <th>Image</th>
+            <th>Name</th>
+
+            <th>Descrition</th>
+            <th>Actions</th>
+        </tr>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td>@movie.MovieId</td>
+                <td><img src="@movie.ThumbnailUrl" /></td>
+                <td>@movie.Name</td>
+
+                <td>@movie.Description</td>
+                <td>
+                    <form asp-action="DeleteMovie" asp-route-MovieId="@movie.MovieId" method="post">
+                        <a class="btn btn-sm btn-primary" asp-action="EditMovie" asp-route-MovieId="@movie.MovieId">Edit</a>
+                        <button type="submit" onclick="return confirm('Do you really want to delete this pie?');" class="btn btn-sm btn-danger">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+}
+<p>
+    <a class="btn btn-primary" asp-action="AddPie">Add new pie</a>
+</p>

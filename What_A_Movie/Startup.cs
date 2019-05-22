@@ -27,7 +27,7 @@ namespace What_A_Movie
 
             services.AddTransient<IMovieRepository, MovieRepository>();
             services.AddTransient<IMovieReviewRepository, MovieReviewRepository>();
-
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
 
 
 

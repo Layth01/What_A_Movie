@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.Encodings.Web;
 
@@ -16,19 +17,23 @@ namespace What_A_Movie.Controllers
 
         private readonly IMovieReviewRepository _movieReviewRepository;
 
+        private readonly ICategoryRepository _categoryRepository;
         private readonly HtmlEncoder _htmlEncoder;
         public MoviesController(IMovieRepository movieRepository,
                                 IMovieReviewRepository movieReviewRepository,
-                                HtmlEncoder htmlEncoder)
+                                HtmlEncoder htmlEncoder,
+                                ICategoryRepository categoryRepository)
         {
             _movieRepository = movieRepository;
             _movieReviewRepository = movieReviewRepository;
+
             _htmlEncoder = htmlEncoder;
+            _categoryRepository = categoryRepository;
         }
 
         public IActionResult Index()
         {
-            var movies = _movieRepository.GetAllMovies().OrderBy(p => p.Name);
+            IEnumerable<Movie> movies = _movieRepository.Movies.OrderBy(p => p.Name);
 
             return View(movies);
         }
